@@ -1,229 +1,803 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CPID SERVER STATUS</title>
-
-<style>
-/* RESET */
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
-body{background: radial-gradient(circle at top,#0b1220,#02050a);color:#00ffe1;overflow-x:hidden;}
-
-/* ULTRA STYLISH HEADER */
-header{
-padding:20px;
-text-align:center;
-background:rgba(255,255,255,0.03);
-backdrop-filter:blur(20px);
-border-bottom:1px solid rgba(0,255,255,0.1);
-position:relative;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FASTEST UNLOCK GSM</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }:root {
+  --bg: #05070d;
+  --bg2: #0b1020;
+  --card: rgba(255,255,255,0.05);
+  --line: rgba(0,255,255,0.14);
+  --text: #eafcff;
+  --muted: #97a7c3;
+  --cyan: #00f5ff;
+  --blue: #2f7bff;
+  --pink: #ff00c8;
+  --green: #27f59a;
 }
 
-.ultraHeader{
-font-size:3rem;
-font-weight:900;
-background: linear-gradient(270deg, #00ffe1, #00aaff, #ff00cc, #fffc00, #ff5500);
-background-size: 800% 800%;
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-animation: gradientMove 8s ease infinite, flicker 1.2s infinite;
-text-shadow:
-0 0 5px #00ffe1,
-0 0 10px #00aaff,
-0 0 20px #ff00cc,
-0 0 30px #fffc00,
-0 0 50px #ff5500,
-0 0 80px #00ffe1;
-letter-spacing:3px;
-position:relative;
+body {
+  background:
+    radial-gradient(circle at top left, rgba(0,245,255,0.12), transparent 28%),
+    radial-gradient(circle at top right, rgba(255,0,200,0.1), transparent 25%),
+    linear-gradient(135deg, var(--bg), var(--bg2));
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-.ultraHeader::before{
-content:"";
-position:absolute;
-top:-10px;left:-10px;
-width:calc(100% + 20px);
-height:calc(100% + 20px);
-border-radius:8px;
-box-shadow:
-0 0 15px #00ffe1,
-0 0 25px #00aaff,
-0 0 40px #ff00cc;
-animation: glowPulse 2.5s infinite alternate;
-z-index:-1;
+.container {
+  width: min(1180px, 92%);
+  margin: auto;
 }
 
-@keyframes gradientMove{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
-@keyframes flicker{0%,18%,22%,25%,53%,57%,100%{opacity:1;}20%,24%,55%{opacity:0.7;}}
-@keyframes glowPulse{0%{transform:scale(1);opacity:0.6;}50%{transform:scale(1.05);opacity:0.8;}100%{transform:scale(1);opacity:0.6;}}
-
-/* NAV */
-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;padding:15px;}
-nav button{padding:10px 15px;border-radius:12px;border:1px solid rgba(0,255,255,0.2);background:rgba(255,255,255,0.03);color:#00ffe1;cursor:pointer;transition:0.3s;}
-nav button:hover{transform:scale(1.05);box-shadow:0 0 15px rgba(0,255,255,0.3);}
-
-/* GRID */
-#grid{display:grid;grid-template-columns:repeat(1,1fr);gap:12px;padding:15px;}
-@media(min-width:600px){#grid{grid-template-columns:repeat(2,1fr);}}
-
-/* CARD */
-.card{
-padding:16px;
-border-radius:15px;
-background:rgba(255,255,255,0.04);
-border:1px solid rgba(0,255,255,0.15);
-display:flex;
-justify-content:space-between;
-align-items:center;
-transition:0.3s;
-position:relative;
-overflow:hidden;
-}
-.card:hover{transform:scale(1.03);box-shadow:0 0 25px rgba(0,255,255,0.25);}
-
-/* PRICE TAG */
-.priceTag{
-padding:5px 12px;
-border-radius:12px;
-background:rgba(0,255,153,0.08);
-border:1px solid rgba(0,255,153,0.4);
-font-size:13px;
-font-weight:bold;
-color:#00ff99;
-text-shadow:0 0 8px #00ff99,0 0 15px #00ff99;
-backdrop-filter:blur(8px);
-transition:0.3s;
-}
-.priceTag:hover{box-shadow:0 0 20px #00ff99,0 0 40px #00ff99 inset;transform:scale(1.1);}
-
-/* LIVE */
-.liveBox{
-display:flex;align-items:center;gap:10px;position:relative;
-}
-.liveDot{
-position:relative;width:12px;height:12px;background:#00ff99;border-radius:50%;
-box-shadow:0 0 15px #00ff99,0 0 25px #00ff99;
-animation:coreBreath 1.8s infinite alternate;
-}
-.liveDot::after{
-content:"";
-position:absolute;width:100%;height:100%;border-radius:50%;
-background:#00ff99;
-box-shadow:0 0 15px #00ff99,0 0 30px #00ff99,0 0 50px #00ff99,0 0 80px #00ff99;
-animation:coreFlash 1.5s infinite alternate;
-}
-.liveDot::before{
-content:"";
-position:absolute;width:250%;height:250%;top:-75%;left:-75%;
-border-radius:50%;border:2px solid rgba(0,255,153,0.7);
-animation:ripple 2.2s infinite;
-}
-.liveBox::after{
-content:"";position:absolute;width:300%;height:300%;top:-100%;left:-100%;
-border-radius:50%;border:1px solid rgba(0,255,153,0.4);
-animation:ripple2 2.8s infinite;
-}
-.liveBox::before{
-content:"";position:absolute;width:180%;height:180%;top:-40%;left:-40%;
-border-radius:50%;border:2px dashed rgba(0,255,153,0.5);
-animation:rotateRing 4s linear infinite;
-}
-.liveText{
-font-size:12px;font-weight:bold;letter-spacing:1px;color:#00ff99;
-text-shadow:0 0 10px #00ff99,0 0 25px #00ff99,0 0 50px #00ff99;
-animation:textGlow 2s infinite alternate;
+header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(14px);
+  background: rgba(5, 7, 13, 0.8);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
 }
 
-@keyframes coreBreath{0%{transform:scale(1);}50%{transform:scale(1.6);}100%{transform:scale(1);}}
-@keyframes coreFlash{0%{opacity:1;}50%{opacity:0.5;}100%{opacity:1;}}
-@keyframes ripple{0%{transform:scale(0.3);opacity:0.8;}70%{transform:scale(2);opacity:0;}100%{opacity:0;}}
-@keyframes ripple2{0%{transform:scale(0.5);opacity:0.6;}80%{transform:scale(2.3);opacity:0;}100%{opacity:0;}}
-@keyframes rotateRing{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
-@keyframes textGlow{0%{text-shadow:0 0 10px #00ff99,0 0 20px #00ff99;}100%{text-shadow:0 0 25px #00ff99,0 0 50px #00ff99,0 0 80px #00ff99;}}
-
-/* WHATSAPP FLOAT BUTTON */
-.wa-float{
-position:fixed;bottom:20px;right:20px;background:linear-gradient(135deg,#00ff99,#00aaff,#ff00cc);
-padding:14px 20px;border-radius:50px;cursor:pointer;font-weight:bold;color:#fff;font-size:16px;
-display:flex;align-items:center;gap:8px;box-shadow:0 0 15px #00ff99,0 0 30px #00aaff,0 0 45px #ff00cc;transition:0.3s;z-index:9999;backdrop-filter:blur(8px);
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0;
+  gap: 20px;
+  flex-wrap: wrap;
 }
-.wa-float:hover{transform:scale(1.1);box-shadow:0 0 25px #00ff99,0 0 50px #00aaff,0 0 70px #ff00cc;}
-.wa-icon{font-size:18px;animation:waPulse 1.5s infinite alternate;}
-@keyframes waPulse{0%{transform:scale(1);}50%{transform:scale(1.2);}100%{transform:scale(1);}}
-</style>
+
+.logo {
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  background: linear-gradient(90deg, var(--cyan), #9cfaff, var(--pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nav-links {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.nav-links a {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+.nav-links a:hover {
+  color: var(--cyan);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 20px;
+  border-radius: 14px;
+  text-decoration: none;
+  font-weight: 700;
+  transition: 0.25s ease;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, var(--cyan), var(--blue));
+  color: #031018;
+  box-shadow: 0 0 22px rgba(0,245,255,0.18);
+}
+
+.btn-secondary {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.08);
+  color: var(--text);
+}
+
+.btn-secondary:hover,
+.btn-primary:hover {
+  transform: translateY(-2px);
+}
+
+.hero {
+  padding: 78px 0 56px;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 28px;
+  align-items: center;
+}
+
+.badge {
+  display: inline-block;
+  padding: 9px 14px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  color: var(--cyan);
+  border: 1px solid rgba(0,245,255,0.22);
+  background: rgba(0,245,255,0.06);
+  margin-bottom: 18px;
+}
+
+.hero h1 {
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  line-height: 1.06;
+  margin-bottom: 16px;
+}
+
+.hero h1 span {
+  background: linear-gradient(90deg, var(--cyan), #ffffff, var(--pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.7;
+  max-width: 640px;
+  margin-bottom: 24px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.hero-card, .card, .form-box, .stats {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  backdrop-filter: blur(18px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.26);
+}
+
+.hero-card {
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.glow {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,245,255,0.22), transparent 65%);
+  top: -70px;
+  right: -60px;
+}
+
+.hero-card h3 {
+  margin-bottom: 18px;
+  font-size: 1.25rem;
+}
+
+.status-list {
+  display: grid;
+  gap: 12px;
+}
+
+.status-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.status-item span:last-child {
+  color: var(--green);
+  font-weight: 700;
+}
+
+section {
+  padding: 26px 0 56px;
+}
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.section-sub {
+  color: var(--muted);
+  margin-bottom: 28px;
+  line-height: 1.7;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card {
+  padding: 22px;
+  transition: 0.28s ease;
+}
+
+.service-card {
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(0,245,255,0.28);
+}
+
+.card h3 {
+  margin-bottom: 12px;
+  font-size: 1.15rem;
+  color: #fff;
+}
+
+.card p {
+  color: var(--muted);
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+.service-tags {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+}
+
+.live-tag {
+  color: #07140e;
+  background: linear-gradient(90deg, var(--green), #8cffc8);
+}
+
+.price-tag {
+  color: #041018;
+  background: linear-gradient(90deg, var(--cyan), #9cfaff);
+}
+
+.stats {
+  padding: 26px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.stat-box {
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.05);
+  text-align: center;
+}
+
+.stat-box h4 {
+  font-size: 1.8rem;
+  color: var(--cyan);
+  margin-bottom: 8px;
+}
+
+.stat-box p {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.order-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.form-box {
+  padding: 24px;
+}
+
+.info-list {
+  display: grid;
+  gap: 14px;
+}
+
+.info-item {
+  padding: 16px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.info-item strong {
+  display: block;
+  margin-bottom: 6px;
+  color: #fff;
+}
+
+.info-item span {
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.74);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 999;
+}
+
+.popup-overlay.active {
+  display: flex;
+}
+
+.popup-box {
+  width: min(520px, 100%);
+  background:
+    radial-gradient(circle at top right, rgba(0,245,255,0.12), transparent 30%),
+    radial-gradient(circle at bottom left, rgba(255,0,200,0.1), transparent 28%),
+    rgba(8,12,24,0.97);
+  border: 1px solid rgba(0,245,255,0.22);
+  border-radius: 28px;
+  padding: 26px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 30px rgba(0,245,255,0.12);
+  position: relative;
+  overflow: hidden;
+}
+
+.popup-box h3 {
+  margin-bottom: 10px;
+  font-size: 1.45rem;
+  background: linear-gradient(90deg, var(--cyan), #ffffff, var(--pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.popup-box p {
+  color: var(--muted);
+  line-height: 1.75;
+  margin-bottom: 18px;
+  font-size: 0.98rem;
+}
+
+.popup-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.04);
+  color: var(--text);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.popup-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(0,245,255,0.08);
+  border: 1px solid rgba(0,245,255,0.18);
+  color: var(--cyan);
+  font-size: 0.82rem;
+  font-weight: 800;
+  margin-bottom: 14px;
+}
+
+.popup-price {
+  margin-top: 2px;
+  margin-bottom: 16px;
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #fff;
+  font-weight: 700;
+}
+
+.form-grid {
+  display: grid;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+input, textarea, select {
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 14px 15px;
+  color: white;
+  outline: none;
+  font-size: 0.95rem;
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.popup-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+.popup-actions .btn {
+  flex: 1 1 180px;
+  min-height: 52px;
+}
+
+footer {
+  padding: 26px 0 40px;
+  color: var(--muted);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  text-align: center;
+  margin-top: 12px;
+}
+
+.floating-wa {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1000;
+  min-width: 58px;
+  height: 58px;
+  padding: 0 18px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(90deg, #25d366, #6dffb1);
+  color: #04150c;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 0 12px 30px rgba(37,211,102,0.28);
+  border: 1px solid rgba(255,255,255,0.18);
+}
+
+.floating-wa:hover {
+  transform: translateY(-2px);
+}
+
+.floating-wa span {
+  font-size: 0.95rem;
+}
+
+@media (max-width: 980px) {
+  .hero,
+  .order-wrap,
+  .grid-3,
+  .stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+  </style>
 </head>
-
 <body>
+  <header>
+    <div class="container nav">
+      <div class="logo">FASTEST UNLOCK GSM</div>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#order">Order</a>
+        <a href="#payment">Payment</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </header>  <main>
+    <section class="container hero" id="home">
+      <div>
+        <div class="badge">Premium iPhone Bypass Platform</div>
+        <h1>Professional <span>iPhone Bypass</span> Service</h1>
+        <p>
+          FASTEST UNLOCK GSM is a focused iPhone bypass website for iOS 26.2, iOS 26.3, and iOS 26.4. All services are live with a fixed price of $30 and direct WhatsApp payment support.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#services">View Services</a>
+          <a class="btn btn-secondary" href="#payment">Payment Info</a>
+        </div>
+      </div><div class="hero-card">
+    <div class="glow"></div>
+    <h3>Live Service Status</h3>
+    <div class="status-list">
+      <div class="status-item"><span>iOS 26.2 Bypass</span><span>LIVE</span></div>
+      <div class="status-item"><span>iOS 26.3 Bypass</span><span>LIVE</span></div>
+      <div class="status-item"><span>iOS 26.4 Bypass</span><span>LIVE</span></div>
+      <div class="status-item"><span>Fixed Price</span><span>$30</span></div>
+    </div>
+  </div>
+</section>
 
-<header>
-<h1 class="ultraHeader">CPID SERVER STATUS</h1>
-</header>
+<section class="container" id="services">
+  <h2 class="section-title">Our Services</h2>
+  <p class="section-sub">Click any service card to open the order popup.</p>
+  <div class="grid-3">
+    <div class="card service-card" data-service="iPhone Bypass iOS 26.2">
+      <h3>iPhone Bypass iOS 26.2</h3>
+      <p>Single bypass option for supported iPhone devices running iOS 26.2.</p>
+      <div class="service-tags">
+        <span class="tag live-tag">LIVE</span>
+        <span class="tag price-tag">$30</span>
+      </div>
+    </div>
+    <div class="card service-card" data-service="iPhone Bypass iOS 26.3">
+      <h3>iPhone Bypass iOS 26.3</h3>
+      <p>Single bypass option for supported iPhone devices running iOS 26.3.</p>
+      <div class="service-tags">
+        <span class="tag live-tag">LIVE</span>
+        <span class="tag price-tag">$30</span>
+      </div>
+    </div>
+    <div class="card service-card" data-service="iPhone Bypass iOS 26.4">
+      <h3>iPhone Bypass iOS 26.4</h3>
+      <p>Single bypass option for supported iPhone devices running iOS 26.4.</p>
+      <div class="service-tags">
+        <span class="tag live-tag">LIVE</span>
+        <span class="tag price-tag">$30</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-<nav>
-<button onclick="filter('all')">ALL</button>
-<button onclick="filter('pixel')">PIXEL</button>
-<button onclick="filter('samsung')">SAMSUNG</button>
-<button onclick="filter('xiaomi')">XIAOMI</button>
-<button onclick="filter('oppo')">OPPO</button>
-<button onclick="filter('honor')">HONOR</button>
-<button onclick="filter('iphone')">IPHONE</button>
-</nav>
+<section class="container" id="downloadNoticeSection" style="padding-top: 0; padding-bottom: 8px; text-align:center;">
+  <a href="#" id="activationToolsLink" style="display:inline-block; color: var(--cyan); font-weight: 800; font-size: 1rem; text-decoration: none; border-bottom: 1px solid rgba(0,245,255,0.35); padding-bottom: 4px;">ACTIVATION TOOLS DOWNLOAD</a>
+</section>
 
-<div id="grid"></div>
+<section class="container" id="order" style="padding-top: 8px;">
+  <h2 class="section-title">Order Flow</h2>
+  <p class="section-sub">Simple client flow for bypass orders and payment.</p>
+  <div class="order-wrap">
+    <div class="form-box">
+      <div class="info-list">
+        <div class="info-item"><strong>Step 1</strong><span>Click a service card.</span></div>
+        <div class="info-item"><strong>Step 2</strong><span>Order popup will open.</span></div>
+        <div class="info-item"><strong>Step 3</strong><span>Click Place Order.</span></div>
+        <div class="info-item"><strong>Step 4</strong><span>Payment popup will open and send the client to WhatsApp.</span></div>
+      </div>
+    </div>
+    <div class="form-box" id="contact">
+      <div class="info-list">
+        <div class="info-item"><strong>Brand</strong><span>FASTEST UNLOCK GSM</span></div>
+        <div class="info-item"><strong>WhatsApp</strong><span>Direct payment support via WhatsApp</span></div>
+        <div class="info-item"><strong>Telegram</strong><span><a href="https://t.me/FastestGsmUnlock" target="_blank" style="color: var(--cyan); text-decoration: none; font-weight: 700;">Join our Telegram Channel</a></span></div>
+        <div class="info-item"><strong>All Service Price</strong><span>$30</span></div>
+        <div class="info-item"><strong>Versions</strong><span>iOS 26.2 / 26.3 / 26.4</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<!-- WHATSAPP FLOAT BUTTON -->
-<div class="wa-float" onclick="window.open('https://wa.me/94719141116')">
-<i class="wa-icon">💬</i> WhatsApp
-</div>
+<section class="container" id="payment">
+  <h2 class="section-title">Payment Section</h2>
+  <p class="section-sub">Every service uses one fixed WhatsApp payment flow.</p>
+  <div class="stats">
+    <div class="stat-box"><h4>$30</h4><p>Fixed price</p></div>
+    <div class="stat-box"><h4>LIVE</h4><p>Status</p></div>
+    <div class="stat-box"><h4>WA</h4><p>WhatsApp payment</p></div>
+    <div class="stat-box"><h4>FAST</h4><p>Popup flow</p></div>
+  </div>
+</section>
+  </main>
 
-<script>
-const services=[
-{name:"PIXEL FRP",cat:"pixel",price:"37.50$"},
-{name:"PIXEL NETWORK UNLOCK",cat:"pixel",price:"45$"},
-{name:"SAMSUNG FRP (KG DEVICE)",cat:"samsung",price:"30$"},
-{name:"SAMSUNG NETWORK UNLOCK 🔓",cat:"samsung",price:"23$"},
-{name:"OPPO FRP ANDROID 15-16",cat:"oppo",price:"17$"},
-{name:"XIAOMI CHINA UBL",cat:"xiaomi",price:"32$"},
-{name:"XIAOMI GLOBAL UBL",cat:"xiaomi",price:"15$"},
-{name:"XIAOMI MI ACCOUNT UNLOCK CHINA",cat:"xiaomi",price:"29$"},
-{name:"XIAOMI MI ACCOUNT UNLOCK GLOBAL",cat:"xiaomi",price:"13$"},
-{name:"XIAOMI FRP",cat:"xiaomi",price:"7$"},
-{name:"HONOR FRP",cat:"honor",price:"36$"},
-{name:"HONOR BOOTLOADER UNLOCK KEY",cat:"honor",price:"20$"},
-{name:"HONOR GOOGLE PLAY SERVICE ENABLE",cat:"honor",price:"25$"},
-{name:"IOS BYPASS 26.2.1",cat:"iphone",price:"32$"},
-{name:"IOS BYPASS 26.3.1",cat:"iphone",price:"32$"}
-];
+  <div class="popup-overlay" id="orderPopup">
+    <div class="popup-box">
+      <button class="popup-close" type="button" id="closeOrderPopupBtn">✕</button>
+      <div class="popup-badge">ORDER PANEL</div>
+      <h3>Place Your Bypass Order</h3>
+      <div class="popup-price">Fixed Service Price: $30</div>
+      <p id="orderPopupText">Your selected service will appear here.</p>
+      <div class="form-grid">
+        <input type="text" id="popupCustomerName" placeholder="Full Name" />
+        <input type="text" id="popupCustomerContact" placeholder="Telegram / WhatsApp" />
+        <input type="text" id="popupIphoneModel" placeholder="iPhone Model" />
+        <input type="text" id="popupImei" placeholder="IMEI / Serial Number" />
+        <textarea id="popupDetails" placeholder="Write bypass details..."></textarea>
+      </div>
+      <div class="popup-actions">
+        <button class="btn btn-primary" type="button" id="placeOrderBtn">Submit Order</button>
+        <button class="btn btn-secondary" type="button" id="cancelOrderBtn">Close</button>
+      </div>
+    </div>
+  </div>  <div class="popup-overlay" id="downloadNoticePopup">
+    <div class="popup-box">
+      <button class="popup-close" type="button" id="closeDownloadNoticeBtn">✕</button>
+      <div class="popup-badge">NOTICE</div>
+      <h3>Activation Tools Download</h3>
+      <p>Please complete your device registration order first.</p>
+      <div class="popup-actions">
+        <button type="button" class="btn btn-primary" id="downloadNoticeOkBtn">OK</button>
+      </div>
+    </div>
+  </div>  <div class="popup-overlay" id="paymentPopup">
+    <div class="popup-box">
+      <button class="popup-close" type="button" id="closePaymentPopupBtn">✕</button>
+      <div class="popup-badge">NEON PAYMENT PANEL</div>
+      <h3>Complete Payment on WhatsApp</h3>
+      <div class="popup-price">Fixed Service Price: $30</div>
+      <div class="form-grid" style="margin-top: 0; margin-bottom: 14px;">
+        <select id="paymentMethodSelect" style="width: 100%; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 14px 15px; color: white; outline: none; font-size: 0.95rem;">
+          <option value="">Select Payment Method</option>
+          <option value="Binance">BINANCE</option>
+          <option value="Crypto">CRYPTO</option>
+        </select>
+      </div>
+      <p id="paymentPopupText">Click below to open WhatsApp with an automatic payment request message.</p>
+      <div class="popup-actions">
+        <a id="popupWhatsAppBtn" href="https://wa.me/94719141116" target="_blank" class="btn btn-primary">Open WhatsApp</a>
+        <button type="button" class="btn btn-secondary" id="cancelPaymentBtn">Close</button>
+      </div>
+    </div>
+  </div>  <footer>
+    <div class="container">
+      © 2026 FASTEST UNLOCK GSM — Premium iPhone bypass website.
+    </div>
+  </footer>  <a class="floating-wa" href="https://wa.me/94719141116?text=Hello%2C%20I%20want%20to%20contact%20you%20about%20iPhone%20bypass%20service." target="_blank" aria-label="Chat on WhatsApp">
+    <span>WhatsApp</span>
+  </a>  <script>
+    let selectedServiceName = 'iPhone Bypass Service';
 
-let current=services;
+    function openOrderPopup(serviceName) {
+      selectedServiceName = serviceName;
+      const orderPopup = document.getElementById('orderPopup');
+      const orderPopupText = document.getElementById('orderPopupText');
+      if (orderPopupText) {
+        orderPopupText.textContent = serviceName + ' selected. Fill the details and click Submit Order.';
+      }
+      if (orderPopup) {
+        orderPopup.classList.add('active');
+      }
+    }
 
-function render(list){
-let box=document.getElementById("grid");
-box.innerHTML="";
-list.forEach(s=>{
-box.innerHTML+=`
-<div class="card">
-<div>${s.name}</div>
-<div style="display:flex;gap:10px;align-items:center;">
-<div class="priceTag">${s.price}</div>
-<div class="liveBox">
-<div class="liveDot"></div>
-<div class="liveText">LIVE</div>
-</div>
-</div>
-</div>`;
-});
-}
+    function closeOrderPopup() {
+      const orderPopup = document.getElementById('orderPopup');
+      if (orderPopup) {
+        orderPopup.classList.remove('active');
+      }
+    }
 
-function filter(cat){
-if(cat==="all") current=services;
-else current=services.filter(s=>s.cat===cat);
-render(current);
-}
+    function openPaymentPopup() {
+      const paymentPopup = document.getElementById('paymentPopup');
+      const paymentPopupText = document.getElementById('paymentPopupText');
+      const popupWhatsAppBtn = document.getElementById('popupWhatsAppBtn');
+      const paymentMethodSelect = document.getElementById('paymentMethodSelect');
+      const selectedMethod = paymentMethodSelect && paymentMethodSelect.value ? paymentMethodSelect.value : 'Not selected';
+      const message = 'Hello, a client wants to make payment for ' + selectedServiceName + ' ($30). Payment method: ' + selectedMethod + '. Please confirm the payment process.';
+      const waUrl = 'https://wa.me/94719141116?text=' + encodeURIComponent(message);
 
-render(current);
-</script>
+      if (paymentPopupText) {
+        paymentPopupText.textContent = selectedServiceName + ' selected. Choose a payment method below, then open WhatsApp with the automatic payment message.';
+      }
+      if (popupWhatsAppBtn) {
+        popupWhatsAppBtn.href = waUrl;
+      }
+      if (paymentPopup) {
+        paymentPopup.classList.add('active');
+      }
+    }
 
-</body>
+    function closePaymentPopup() {
+      const paymentPopup = document.getElementById('paymentPopup');
+      if (paymentPopup) {
+        paymentPopup.classList.remove('active');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const serviceCards = document.querySelectorAll('.service-card');
+      serviceCards.forEach(function(card) {
+        card.addEventListener('click', function() {
+          const serviceName = card.getAttribute('data-service') || 'iPhone Bypass Service';
+          openOrderPopup(serviceName);
+        });
+      });
+
+      const placeOrderBtn = document.getElementById('placeOrderBtn');
+      if (placeOrderBtn) {
+        placeOrderBtn.addEventListener('click', function() {
+          closeOrderPopup();
+          openPaymentPopup();
+        });
+      }
+
+      const paymentMethodSelect = document.getElementById('paymentMethodSelect');
+      const popupWhatsAppBtn = document.getElementById('popupWhatsAppBtn');
+      if (paymentMethodSelect && popupWhatsAppBtn) {
+        paymentMethodSelect.addEventListener('change', function() {
+          const selectedMethod = paymentMethodSelect.value || 'Not selected';
+          const message = 'Hello, a client wants to make payment for ' + selectedServiceName + ' ($30). Payment method: ' + selectedMethod + '. Please confirm the payment process.';
+          popupWhatsAppBtn.href = 'https://wa.me/94719141116?text=' + encodeURIComponent(message);
+        });
+      }
+
+      const closeOrderPopupBtn = document.getElementById('closeOrderPopupBtn');
+      const cancelOrderBtn = document.getElementById('cancelOrderBtn');
+      const closePaymentPopupBtn = document.getElementById('closePaymentPopupBtn');
+      const cancelPaymentBtn = document.getElementById('cancelPaymentBtn');
+
+      if (closeOrderPopupBtn) closeOrderPopupBtn.addEventListener('click', closeOrderPopup);
+      if (cancelOrderBtn) cancelOrderBtn.addEventListener('click', closeOrderPopup);
+      if (closePaymentPopupBtn) closePaymentPopupBtn.addEventListener('click', closePaymentPopup);
+      if (cancelPaymentBtn) cancelPaymentBtn.addEventListener('click', closePaymentPopup);
+
+      const orderPopup = document.getElementById('orderPopup');
+      const paymentPopup = document.getElementById('paymentPopup');
+
+      if (orderPopup) {
+        orderPopup.addEventListener('click', function(e) {
+          if (e.target === orderPopup) closeOrderPopup();
+        });
+      }
+
+      if (paymentPopup) {
+        paymentPopup.addEventListener('click', function(e) {
+          if (e.target === paymentPopup) closePaymentPopup();
+        });
+      }
+
+      const activationToolsLink = document.getElementById('activationToolsLink');
+      const downloadNoticePopup = document.getElementById('downloadNoticePopup');
+      const closeDownloadNoticeBtn = document.getElementById('closeDownloadNoticeBtn');
+      const downloadNoticeOkBtn = document.getElementById('downloadNoticeOkBtn');
+
+      function openDownloadNotice() {
+        if (downloadNoticePopup) downloadNoticePopup.classList.add('active');
+      }
+
+      function closeDownloadNotice() {
+        if (downloadNoticePopup) downloadNoticePopup.classList.remove('active');
+      }
+
+      if (activationToolsLink) {
+        activationToolsLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          openDownloadNotice();
+        });
+      }
+
+      if (closeDownloadNoticeBtn) closeDownloadNoticeBtn.addEventListener('click', closeDownloadNotice);
+      if (downloadNoticeOkBtn) downloadNoticeOkBtn.addEventListener('click', closeDownloadNotice);
+
+      if (downloadNoticePopup) {
+        downloadNoticePopup.addEventListener('click', function(e) {
+          if (e.target === downloadNoticePopup) closeDownloadNotice();
+        });
+      }
+    });
+  </script></body>
 </html>
